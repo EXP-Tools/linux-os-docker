@@ -1,0 +1,92 @@
+# How to use :
+# password=demo_password domain=demo_domain.com docker-compose build
+# docker-compose up -d
+# docker-compose down
+# --------------------------------------------------------------------------------
+
+version: '2'
+services:
+  centos6:
+    hostname: centos_6
+    container_name: centos_6
+    build:
+      context: ./centos/6/
+      dockerfile: ./Dockerfile
+    stdin_open: true
+    tty: true
+    privileged: true
+    entrypoint: ["sh"]
+    networks: 
+      vpn:
+        ipv4_address: 172.168.22.2
+    restart: on-failure
+
+  centos7:
+    hostname: centos_7
+    container_name: centos_7
+    build:
+      context: ./centos/7/
+      dockerfile: ./Dockerfile
+    stdin_open: true
+    tty: true
+    privileged: true
+    entrypoint: ["sh"]
+    networks: 
+      vpn:
+        ipv4_address: 172.168.22.3
+    restart: on-failure
+
+  ubuntu14:
+    hostname: ubuntu_14
+    container_name: ubuntu_14
+    build:
+      context: ./ubuntu/14/
+      dockerfile: ./Dockerfile
+    stdin_open: true
+    tty: true
+    privileged: true
+    entrypoint: ["sh"]
+    networks: 
+      vpn:
+        ipv4_address: 172.168.22.4
+    restart: on-failure
+
+  ubuntu16:
+    hostname: ubuntu_16
+    container_name: ubuntu_16
+    build:
+      context: ./ubuntu/16/
+      dockerfile: ./Dockerfile
+    stdin_open: true
+    tty: true
+    privileged: true
+    entrypoint: ["sh"]
+    networks: 
+      vpn:
+        ipv4_address: 172.168.22.5
+    restart: on-failure
+
+  ubuntu18:
+    hostname: ubuntu_18
+    container_name: ubuntu_18
+    build:
+      context: ./ubuntu/18/
+      dockerfile: ./Dockerfile
+    stdin_open: true
+    tty: true
+    privileged: true
+    entrypoint: ["sh"]
+    networks: 
+      vpn:
+        ipv4_address: 172.168.22.6
+    restart: on-failure
+
+  
+networks:
+  vpn:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet:  172.168.22.0/24
+          gateway: 172.168.22.1
