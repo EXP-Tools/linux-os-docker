@@ -11,9 +11,9 @@ services:
     build:
       context: ./centos/6/
       dockerfile: ./Dockerfile
-    stdin_open: true
-    tty: true
-    privileged: true
+    stdin_open: true    # -i interactive
+    tty: true           # -t tty
+    privileged: true    # -u root
     entrypoint: ["sh"]
     networks: 
       vpn:
